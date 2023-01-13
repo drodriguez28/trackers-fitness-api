@@ -3,6 +3,9 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
+mongoose.set('strictQuery', false);
+
+
 const app = express();
 const port = process.env.PORT || 5050;
 app.use(cors());
@@ -25,11 +28,9 @@ mongoose
     console.log("error connecting to mongoDb", err);
   });
 
+  const userRoutes = require('./routes/Users')
+  app.use('/users', userRoutes)
+
 app.listen(port, () => {
   console.log("app is listening to me", port);
 });
-
-
-// vid 11:07
-
-//https://www.youtube.com/watch?v=CloazlUzTro
